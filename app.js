@@ -20,6 +20,8 @@
     const openBtn = document.getElementById('openBtn');
     const deleteBtn = document.getElementById('deleteBtn');
     const textarea = document.getElementById('noteContent');
+    const renderToggle = document.getElementById('renderToggle');
+    const renderedContent = document.getElementById('renderedContent');
     const inputContainer = document.querySelector('.input-container');
 
     let currentNoteRef = null;
@@ -136,10 +138,46 @@
             clearTimeout(saveTimeout);
             saveTimeout = setTimeout(() => {
                 if (currentNoteRef) currentNoteRef.set(textarea.value);
+                // If rendered view is active, re-render after save to keep parity
+                if (renderToggle && renderToggle.checked) renderMarkdown(textarea.value);
             }, 500);
         };
         textarea.addEventListener('input', saveHandler);
         deleteBtn.style.display = 'block';
+    }
+
+    // Render markdown with marked and KaTeX support
+    function renderMarkdown(text) {
+        if (!renderedContent) return;
+        let html = marked.parse(text || '');
+    // Sanitize HTML
+    if (window.DOMPurify) html = DOMPurify.sanitize(html);
+        renderedContent.innerHTML = html;
+        try {
+            renderMathInElement(renderedContent, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ],
+                throwOnError: false
+            });
+        } catch (err) {
+            console.warn('KaTeX render failed:', err);
+        }
+    }
+
+    if (renderToggle && renderedContent) {
+        renderToggle.addEventListener('change', () => {
+            const on = renderToggle.checked;
+            if (on) {
+                textarea.hidden = true;
+                renderedContent.hidden = false;
+                renderMarkdown(textarea.value);
+            } else {
+                renderedContent.hidden = true;
+                textarea.hidden = false;
+            }
+        });
     }
 
     // Delete note safely

@@ -5,9 +5,14 @@ people's notes, making Note4All a great place to share knowledge. You can also
 use Note4All to transfer text across devices and create anonymous online chat
 rooms.
 
+Note4All also supports Markdown formatting and LaTeX math rendering, so you can
+write rich notes with complex formatting and mathematical equations. Don't know
+how to use Markdown and LaTeX? Get started by visiting the
+[Markdown Guide](https://www.markdownguide.org/).
+
 ## Website
 
-Note4All is hosted on GitHub pages: <https://willyblah.github.io/note4all/>
+GitHub Pages: <https://willyblah.github.io/note4all/>
 
 An overview of Note4All can be found in the `note4all` note.
 
@@ -30,5 +35,6 @@ notes will be saved automatically.
 
 ## Future Plans
 
-- Add note URLs for easier note sharing
-- Add support for markdown notes
+- [ ] Add note URLs for easier note sharing
+- [ ] Add syntax highlighting for code blocks
+- [x] Add support for markdown notes
