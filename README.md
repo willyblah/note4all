@@ -13,12 +13,11 @@ An overview of Note4All can be found in the `note4all` note.
 
 ## Rules
 
-- Do NOT delete this note.
 - Do NOT post harmful or inappropriate content.
 - Do NOT delete or modify other people's notes without permission.
 - Do NOT use scripts or bots to create or edit notes.
 - Do NOT create extremely large notes. Note4All uses a free Firebase database,
-  so the storage limit is 1GB.
+  which has a storage limit of 1GB.
 
 There is no way to punish people who fail to obey these rules, but hopefully,
 everyone can work together to build a wonderful Note4All community.
