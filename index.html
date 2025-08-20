@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note4All</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Note4All</h1>
+    <div class="header">
+        <div class="input-container">
+            <input type="text" id="noteName" placeholder="Enter note name">
+            <button id="showListBtn">▼</button>
+            <div id="noteDropdown"></div>
+        </div>
+        <button id="openBtn">Open</button>
+        <button id="deleteBtn" style="display: none;">Delete</button>
+    </div>
+    <textarea id="noteContent" placeholder="Edit your note here..."></textarea>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/12.1.0/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/12.1.0/firebase-database-compat.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
