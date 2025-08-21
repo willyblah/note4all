@@ -131,6 +131,7 @@
             const content = snapshot.val() || '';
             if (document.activeElement !== textarea) textarea.value = content;
             deleteBtn.style.display = snapshot.exists() ? 'block' : 'none';
+            if (renderToggle.checked) renderMarkdown(content);
         });
 
         if (saveHandler) textarea.removeEventListener('input', saveHandler);
@@ -150,8 +151,8 @@
     function renderMarkdown(text) {
         if (!renderedContent) return;
         let html = marked.parse(text || '');
-    // Sanitize HTML
-    if (window.DOMPurify) html = DOMPurify.sanitize(html);
+        // Sanitize HTML
+        if (window.DOMPurify) html = DOMPurify.sanitize(html);
         renderedContent.innerHTML = html;
         try {
             renderMathInElement(renderedContent, {
