@@ -293,6 +293,44 @@ textarea:focus {
     line-height: 1.4;
 }
 
+#renderedContent table {
+    border-collapse: collapse;
+    width: auto;
+    display: inline-block;
+    border: 1px solid #bdc3c7;
+}
+
+#renderedContent th,
+#renderedContent td {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    text-align: left;
+}
+
+#renderedContent th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+#renderedContent tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+#renderedContent blockquote {
+    margin: 0 0 1rem 0;
+    padding: 10px 16px;
+    border-left: 4px solid #bdc3c7;
+    background-color: #fafbfc;
+    color: #555;
+    border-radius: 4px;
+}
+
+#renderedContent blockquote p {
+    /* remove default paragraph spacing inside */
+    margin: 0;
+}
+
 /* Make sure KaTeX uses consistent sizing inside the rendered area */
 #renderedContent .katex {
     font-size: 1rem;
