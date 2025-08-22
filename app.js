@@ -154,6 +154,14 @@
         // Sanitize HTML
         if (window.DOMPurify) html = DOMPurify.sanitize(html);
         renderedContent.innerHTML = html;
+
+        // Syntax highlighting
+        if (window.hljs) {
+            renderedContent.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+
         try {
             renderMathInElement(renderedContent, {
                 delimiters: [

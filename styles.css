@@ -15,7 +15,6 @@ body {
     box-sizing: border-box;
 }
 
-/* App title - scoped so markdown h1 doesn't inherit this */
 .app-title {
     text-align: center;
     color: #34495e;
@@ -215,7 +214,6 @@ textarea:focus {
 }
 
 /* Markdown content styling */
-
 #renderedContent h1 {
     color: #2c3e50;
     margin-top: 0;
@@ -271,7 +269,6 @@ textarea:focus {
     border-radius: 8px;
     overflow: auto;
     line-height: 1.6;
-    /* improve line height for code */
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
     font-size: 13px;
     border: 1px solid #e1e4e8;
@@ -291,6 +288,19 @@ textarea:focus {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
     font-size: 13px;
     line-height: 1.4;
+}
+
+/* Syntax highlighting styles */
+.hljs {
+    padding: 1em;
+    border-radius: 5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+#renderedContent pre code.hljs {
+    padding: 0;
 }
 
 #renderedContent table {
@@ -331,12 +341,10 @@ textarea:focus {
     margin: 0;
 }
 
-/* Make sure KaTeX uses consistent sizing inside the rendered area */
 #renderedContent .katex {
     font-size: 1rem;
 }
 
-/* Ensure KaTeX elements look good */
 .katex {
     font-size: 1rem;
 }
