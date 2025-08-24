@@ -28,6 +28,21 @@
     let saveTimeout = null;
     let saveHandler = null; // to remove previous handler when switching notes
 
+    // Hash helpers
+    function hashToNoteName(hash) {
+        if (!hash) return '';
+        return decodeURIComponent(hash.replace(/^#/, ''));
+    }
+
+    function navigateToNote(name) {
+        const targetHash = '#' + encodeURIComponent(name);
+        // If hash already matches, load immediately
+        if (location.hash === targetHash)
+            loadNote(name);
+        else
+            location.hash = targetHash;
+    }
+
     // Render dropdown items (sorted)
     function renderDropdown(notes) {
         noteDropdown.innerHTML = '';
@@ -109,7 +124,7 @@
     function selectNote(noteName) {
         noteNameEl.value = noteName;
         noteDropdown.style.display = 'none';
-        loadNote(noteName);
+        navigateToNote(noteName);
     }
 
     // Open/create via enter or button
@@ -118,18 +133,26 @@
             e.preventDefault();
             const name = noteNameEl.value.trim();
             if (!name) return alert('Please enter a note name.');
-            loadNote(name);
+            navigateToNote(name);
         }
     });
 
     openBtn.addEventListener('click', () => {
         const name = noteNameEl.value.trim();
         if (!name) return alert('Please enter a note name.');
-        loadNote(name);
+        navigateToNote(name);
     });
 
     // Load note and set up autosave (ensure we don't add duplicate listeners)
     function loadNote(noteName) {
+        if (!noteName && location.hash)
+            noteName = hashToNoteName(location.hash);
+        if (!noteName) return;
+
+        // Keep the input in sync (useful when navigation came from hash)
+        if (noteNameEl.value !== noteName)
+            noteNameEl.value = noteName;
+
         if (currentNoteRef)
             currentNoteRef.off();
         currentNoteRef = db.ref('notes/' + noteName);
@@ -206,14 +229,31 @@
         if (!currentNoteRef) return;
         if (!confirm('Are you sure you want to delete this note?'))
             return;
+        const deletionName = noteNameEl.value.trim();
         currentNoteRef.remove().then(() => {
             textarea.value = '';
             noteNameEl.value = '';
             deleteBtn.style.display = 'none';
             currentNoteRef = null;
+            if (hashToNoteName(location.hash) === deletionName)
+                history.replaceState(null, '', location.pathname + location.search);
         }).catch((err) => {
             console.error('Failed to delete note:', err);
             alert('Failed to delete note. See console for details.');
         });
     });
+
+    // Hash routing: open note from URL, and react to hash changes
+    window.addEventListener('hashchange', () => {
+        const name = hashToNoteName(location.hash);
+        if (name)
+            loadNote(name);
+    });
+
+    // Initial load from hash (if present)
+    const initialName = hashToNoteName(location.hash);
+    if (initialName) {
+        noteNameEl.value = initialName;
+        loadNote(initialName);
+    }
 })();
