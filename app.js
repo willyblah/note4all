@@ -57,7 +57,8 @@
         const notes = snapshot.val() || {};
         renderDropdown(notes);
         // Only schedule layout/position adjustment when the dropdown is visible
-        if (noteDropdown.style.display !== 'none') requestAnimationFrame(adjustDropdownPosition);
+        if (noteDropdown.style.display !== 'none')
+            requestAnimationFrame(adjustDropdownPosition);
     });
 
     // Position and size dropdown to avoid viewport clipping
@@ -84,20 +85,24 @@
         e.stopPropagation();
         const isShown = noteDropdown.style.display === 'block';
         noteDropdown.style.display = isShown ? 'none' : 'block';
-        if (!isShown) requestAnimationFrame(adjustDropdownPosition);
+        if (!isShown)
+            requestAnimationFrame(adjustDropdownPosition);
     });
 
     // Hide dropdown on outside click
     document.addEventListener('click', (e) => {
-        if (!inputContainer.contains(e.target)) noteDropdown.style.display = 'none';
+        if (!inputContainer.contains(e.target))
+            noteDropdown.style.display = 'none';
     });
 
     window.addEventListener('resize', () => {
-        if (noteDropdown.style.display !== 'none') requestAnimationFrame(adjustDropdownPosition);
+        if (noteDropdown.style.display !== 'none')
+            requestAnimationFrame(adjustDropdownPosition);
     });
     // Use a passive scroll listener and only schedule rAF when dropdown is visible
     window.addEventListener('scroll', () => {
-        if (noteDropdown.style.display !== 'none') requestAnimationFrame(adjustDropdownPosition);
+        if (noteDropdown.style.display !== 'none')
+            requestAnimationFrame(adjustDropdownPosition);
     }, { passive: true, capture: true });
 
     // Select a note from the dropdown
@@ -125,22 +130,28 @@
 
     // Load note and set up autosave (ensure we don't add duplicate listeners)
     function loadNote(noteName) {
-        if (currentNoteRef) currentNoteRef.off();
+        if (currentNoteRef)
+            currentNoteRef.off();
         currentNoteRef = db.ref('notes/' + noteName);
         currentNoteRef.on('value', (snapshot) => {
             const content = snapshot.val() || '';
-            if (document.activeElement !== textarea) textarea.value = content;
+            if (document.activeElement !== textarea)
+                textarea.value = content;
             deleteBtn.style.display = snapshot.exists() ? 'block' : 'none';
-            if (renderToggle.checked) renderMarkdown(content);
+            if (renderToggle.checked)
+                renderMarkdown(content);
         });
 
-        if (saveHandler) textarea.removeEventListener('input', saveHandler);
+        if (saveHandler)
+            textarea.removeEventListener('input', saveHandler);
         saveHandler = () => {
             clearTimeout(saveTimeout);
             saveTimeout = setTimeout(() => {
-                if (currentNoteRef) currentNoteRef.set(textarea.value);
+                if (currentNoteRef)
+                    currentNoteRef.set(textarea.value);
                 // If rendered view is active, re-render after save to keep parity
-                if (renderToggle && renderToggle.checked) renderMarkdown(textarea.value);
+                if (renderToggle && renderToggle.checked)
+                    renderMarkdown(textarea.value);
             }, 500);
         };
         textarea.addEventListener('input', saveHandler);
@@ -152,7 +163,8 @@
         if (!renderedContent) return;
         let html = marked.parse(text || '');
         // Sanitize HTML
-        if (window.DOMPurify) html = DOMPurify.sanitize(html);
+        if (window.DOMPurify)
+            html = DOMPurify.sanitize(html);
         renderedContent.innerHTML = html;
 
         // Syntax highlighting
@@ -204,5 +216,4 @@
             alert('Failed to delete note. See console for details.');
         });
     });
-
 })();
