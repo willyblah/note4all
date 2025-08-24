@@ -214,53 +214,47 @@ textarea:focus {
 }
 
 /* Markdown content styling */
-#renderedContent h1 {
-    color: #2c3e50;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-}
-
-#renderedContent h2 {
-    color: #2c3e50;
-    margin-top: 0;
-    margin-bottom: 0.45rem;
-    font-size: 1.35rem;
-    font-weight: 600;
-}
-
-#renderedContent h3 {
-    color: #2c3e50;
-    margin-top: 0;
-    margin-bottom: 0.4rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-#renderedContent h4 {
-    color: #2c3e50;
-    margin-top: 0;
-    margin-bottom: 0.35rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-}
-
-#renderedContent h5 {
-    color: #2c3e50;
-    margin-top: 0;
-    margin-bottom: 0.3rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
+#renderedContent h1,
+#renderedContent h2,
+#renderedContent h3,
+#renderedContent h4,
+#renderedContent h5,
 #renderedContent h6 {
     color: #2c3e50;
     margin-top: 0;
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
     font-weight: 600;
 }
+
+#renderedContent h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+#renderedContent h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.45rem;
+}
+
+#renderedContent h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+}
+
+#renderedContent h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+}
+
+#renderedContent h5 {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+#renderedContent h6 {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
 
 #renderedContent pre {
     background: #f6f8fa;
@@ -269,7 +263,7 @@ textarea:focus {
     border-radius: 8px;
     overflow: auto;
     line-height: 1.6;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    font-family: ui-monospace, "Roboto Mono", monospace;
     font-size: 13px;
     border: 1px solid #e1e4e8;
 }
@@ -285,7 +279,7 @@ textarea:focus {
     background: #f6f8fa;
     padding: 3px 6px;
     border-radius: 4px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    font-family: ui-monospace, "Roboto Mono", monospace;
     font-size: 13px;
     line-height: 1.4;
 }
@@ -294,7 +288,7 @@ textarea:focus {
 .hljs {
     padding: 1em;
     border-radius: 5px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    font-family: ui-monospace, "Roboto Mono", monospace;
     font-size: 0.9em;
     line-height: 1.4;
 }
